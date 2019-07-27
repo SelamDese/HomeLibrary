@@ -25,6 +25,11 @@ namespace MyLibrary.Controllers
             var applicationDbContext = _context.Book.Include(b => b.User).Include(b => b.catagory);
             return View(await applicationDbContext.ToListAsync());
         }
+        public async Task<IActionResult> MyBookIndex()
+        {
+            var applicationDbContext = _context.Book.Include(b => b.User).Include(b => b.catagory);
+            return View(await applicationDbContext.ToListAsync());
+        }
 
         // GET: Books/Details/5
         public async Task<IActionResult> Details(int? id)
