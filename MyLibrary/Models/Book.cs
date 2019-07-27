@@ -34,6 +34,7 @@ namespace MyLibrary.Models
         public string UserId { get; set; }
         [Required]
         public ApplicationUser User { get; set; }
+        [Display(Name = "Catagory")]
         public Category catagory { get; set; }
         public virtual ICollection<Borrow> Borrows { get; set; }
         public virtual ICollection<WishList> WishLists { get; set; }
