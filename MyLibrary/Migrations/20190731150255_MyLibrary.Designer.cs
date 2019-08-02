@@ -10,8 +10,8 @@ using MyLibrary.Data;
 namespace MyLibrary.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190727024836_MyLibrery")]
-    partial class MyLibrery
+    [Migration("20190731150255_MyLibrary")]
+    partial class MyLibrary
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -196,7 +196,7 @@ namespace MyLibrary.Migrations
                         {
                             Id = "00000000-ffff-ffff-ffff-ffffffffffff",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "32dd1ae0-dc9d-4692-be6b-21fc28d5d41e",
+                            ConcurrencyStamp = "60819f6b-0fc5-4c17-b5ae-459ceac86f3a",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             FirstName = "admin",
@@ -204,7 +204,7 @@ namespace MyLibrary.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIXuIYVMVdeNFQDgwop6/odi/0L1YS8wkY0vonONw4YVKEclILo6z65iaETYlwmVEg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDXwNAip+MeyDVcopTumD31zv8GI/GVUPwJKmy5zkH2gVoMnzPCdDrNoskJ8/5Vo/w==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794577",
                             TwoFactorEnabled = false,
@@ -214,7 +214,7 @@ namespace MyLibrary.Migrations
 
             modelBuilder.Entity("MyLibrary.Models.Author", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("AuthorId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -224,50 +224,50 @@ namespace MyLibrary.Migrations
                     b.Property<string>("LastName")
                         .IsRequired();
 
-                    b.HasKey("Id");
+                    b.HasKey("AuthorId");
 
                     b.ToTable("Author");
 
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            AuthorId = 1,
                             FirstName = "Meron",
                             LastName = "Getnet"
                         },
                         new
                         {
-                            Id = 2,
+                            AuthorId = 2,
                             FirstName = "Bewketu",
                             LastName = "Seyoum"
                         },
                         new
                         {
-                            Id = 3,
+                            AuthorId = 3,
                             FirstName = "Daniel",
                             LastName = "Kibret"
                         },
                         new
                         {
-                            Id = 4,
+                            AuthorId = 4,
                             FirstName = "Dn Birhanu",
                             LastName = "Gobena"
                         },
                         new
                         {
-                            Id = 5,
+                            AuthorId = 5,
                             FirstName = "Adolf",
                             LastName = "Parlesak"
                         },
                         new
                         {
-                            Id = 6,
+                            AuthorId = 6,
                             FirstName = "Anne",
                             LastName = "Frank"
                         },
                         new
                         {
-                            Id = 7,
+                            AuthorId = 7,
                             FirstName = "Jeff ",
                             LastName = "Kinney"
                         });
@@ -275,7 +275,7 @@ namespace MyLibrary.Migrations
 
             modelBuilder.Entity("MyLibrary.Models.Book", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("BookId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -293,7 +293,7 @@ namespace MyLibrary.Migrations
                     b.Property<string>("UserId")
                         .IsRequired();
 
-                    b.HasKey("Id");
+                    b.HasKey("BookId");
 
                     b.HasIndex("AuthorId");
 
@@ -306,7 +306,7 @@ namespace MyLibrary.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            BookId = 1,
                             AuthorId = 5,
                             CategoryId = 4,
                             Language = "Amharic",
@@ -316,7 +316,7 @@ namespace MyLibrary.Migrations
                         },
                         new
                         {
-                            Id = 2,
+                            BookId = 2,
                             AuthorId = 2,
                             CategoryId = 5,
                             Language = "Amharic",
@@ -326,7 +326,7 @@ namespace MyLibrary.Migrations
                         },
                         new
                         {
-                            Id = 3,
+                            BookId = 3,
                             AuthorId = 6,
                             CategoryId = 4,
                             Language = "English",
@@ -336,7 +336,7 @@ namespace MyLibrary.Migrations
                         },
                         new
                         {
-                            Id = 4,
+                            BookId = 4,
                             AuthorId = 4,
                             CategoryId = 2,
                             Language = "Amharic",
@@ -346,7 +346,7 @@ namespace MyLibrary.Migrations
                         },
                         new
                         {
-                            Id = 5,
+                            BookId = 5,
                             AuthorId = 4,
                             CategoryId = 2,
                             Language = "Geaz",
@@ -356,7 +356,7 @@ namespace MyLibrary.Migrations
                         },
                         new
                         {
-                            Id = 6,
+                            BookId = 6,
                             AuthorId = 3,
                             CategoryId = 4,
                             Language = "Amharic",
@@ -366,7 +366,7 @@ namespace MyLibrary.Migrations
                         },
                         new
                         {
-                            Id = 7,
+                            BookId = 7,
                             AuthorId = 2,
                             CategoryId = 2,
                             Language = "Geaz",
@@ -376,7 +376,7 @@ namespace MyLibrary.Migrations
                         },
                         new
                         {
-                            Id = 8,
+                            BookId = 8,
                             AuthorId = 3,
                             CategoryId = 3,
                             Language = "Amharic",
@@ -386,7 +386,7 @@ namespace MyLibrary.Migrations
                         },
                         new
                         {
-                            Id = 9,
+                            BookId = 9,
                             AuthorId = 7,
                             CategoryId = 3,
                             Language = "English",
@@ -396,7 +396,7 @@ namespace MyLibrary.Migrations
                         },
                         new
                         {
-                            Id = 10,
+                            BookId = 10,
                             AuthorId = 1,
                             CategoryId = 5,
                             Language = "Amharic",
@@ -406,7 +406,7 @@ namespace MyLibrary.Migrations
                         },
                         new
                         {
-                            Id = 11,
+                            BookId = 11,
                             AuthorId = 7,
                             CategoryId = 3,
                             Language = "English",
@@ -424,7 +424,8 @@ namespace MyLibrary.Migrations
 
                     b.Property<int>("BookId");
 
-                    b.Property<DateTime?>("DateBorrowed");
+                    b.Property<DateTime?>("DateBorrowed")
+                        .IsRequired();
 
                     b.Property<DateTime?>("DateReturned");
 
@@ -446,45 +447,53 @@ namespace MyLibrary.Migrations
                             BookId = 1,
                             DateBorrowed = new DateTime(2019, 8, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = "00000000-ffff-ffff-ffff-ffffffffffff"
+                        },
+                        new
+                        {
+                            BorrowId = 2,
+                            BookId = 2,
+                            DateBorrowed = new DateTime(2019, 8, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateReturned = new DateTime(2019, 8, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserId = "00000000-ffff-ffff-ffff-ffffffffffff"
                         });
                 });
 
             modelBuilder.Entity("MyLibrary.Models.Category", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CategoryId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("CategoryName");
 
-                    b.HasKey("Id");
+                    b.HasKey("CategoryId");
 
                     b.ToTable("Category");
 
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            CategoryId = 1,
                             CategoryName = "Education"
                         },
                         new
                         {
-                            Id = 2,
+                            CategoryId = 2,
                             CategoryName = "Spiritual"
                         },
                         new
                         {
-                            Id = 3,
+                            CategoryId = 3,
                             CategoryName = "Children's"
                         },
                         new
                         {
-                            Id = 4,
+                            CategoryId = 4,
                             CategoryName = "History"
                         },
                         new
                         {
-                            Id = 5,
+                            CategoryId = 5,
                             CategoryName = "Poems"
                         });
                 });
@@ -601,7 +610,7 @@ namespace MyLibrary.Migrations
 
             modelBuilder.Entity("MyLibrary.Models.WishList", b =>
                 {
-                    b.HasOne("MyLibrary.Models.Book")
+                    b.HasOne("MyLibrary.Models.Book", "book")
                         .WithMany("WishLists")
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade);

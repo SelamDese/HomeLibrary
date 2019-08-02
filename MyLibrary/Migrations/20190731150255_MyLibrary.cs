@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MyLibrary.Migrations
 {
-    public partial class MyLibrery : Migration
+    public partial class MyLibrary : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -53,27 +53,27 @@ namespace MyLibrary.Migrations
                 name: "Author",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    AuthorId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     FirstName = table.Column<string>(nullable: false),
                     LastName = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Author", x => x.Id);
+                    table.PrimaryKey("PK_Author", x => x.AuthorId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Category",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    CategoryId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     CategoryName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Category", x => x.Id);
+                    table.PrimaryKey("PK_Category", x => x.CategoryId);
                 });
 
             migrationBuilder.CreateTable(
@@ -186,7 +186,7 @@ namespace MyLibrary.Migrations
                 name: "Book",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    BookId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Title = table.Column<string>(nullable: false),
                     Language = table.Column<string>(nullable: true),
@@ -197,18 +197,18 @@ namespace MyLibrary.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Book", x => x.Id);
+                    table.PrimaryKey("PK_Book", x => x.BookId);
                     table.ForeignKey(
                         name: "FK_Book_Author_AuthorId",
                         column: x => x.AuthorId,
                         principalTable: "Author",
-                        principalColumn: "Id",
+                        principalColumn: "AuthorId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Book_Category_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Category",
-                        principalColumn: "Id",
+                        principalColumn: "CategoryId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Book_AspNetUsers_UserId",
@@ -224,7 +224,7 @@ namespace MyLibrary.Migrations
                 {
                     BorrowId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    DateBorrowed = table.Column<DateTime>(nullable: true),
+                    DateBorrowed = table.Column<DateTime>(nullable: false),
                     DateReturned = table.Column<DateTime>(nullable: true),
                     BookId = table.Column<int>(nullable: false),
                     UserId = table.Column<string>(nullable: false)
@@ -236,7 +236,7 @@ namespace MyLibrary.Migrations
                         name: "FK_Borrow_Book_BookId",
                         column: x => x.BookId,
                         principalTable: "Book",
-                        principalColumn: "Id",
+                        principalColumn: "BookId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Borrow_AspNetUsers_UserId",
@@ -262,7 +262,7 @@ namespace MyLibrary.Migrations
                         name: "FK_wishList_Book_BookId",
                         column: x => x.BookId,
                         principalTable: "Book",
-                        principalColumn: "Id",
+                        principalColumn: "BookId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_wishList_AspNetUsers_UserId",
@@ -275,11 +275,11 @@ namespace MyLibrary.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "00000000-ffff-ffff-ffff-ffffffffffff", 0, "32dd1ae0-dc9d-4692-be6b-21fc28d5d41e", "admin@admin.com", true, "admin", "admin", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAEAACcQAAAAEIXuIYVMVdeNFQDgwop6/odi/0L1YS8wkY0vonONw4YVKEclILo6z65iaETYlwmVEg==", null, false, "7f434309-a4d9-48e9-9ebb-8803db794577", false, "admin@admin.com" });
+                values: new object[] { "00000000-ffff-ffff-ffff-ffffffffffff", 0, "60819f6b-0fc5-4c17-b5ae-459ceac86f3a", "admin@admin.com", true, "admin", "admin", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAEAACcQAAAAEDXwNAip+MeyDVcopTumD31zv8GI/GVUPwJKmy5zkH2gVoMnzPCdDrNoskJ8/5Vo/w==", null, false, "7f434309-a4d9-48e9-9ebb-8803db794577", false, "admin@admin.com" });
 
             migrationBuilder.InsertData(
                 table: "Author",
-                columns: new[] { "Id", "FirstName", "LastName" },
+                columns: new[] { "AuthorId", "FirstName", "LastName" },
                 values: new object[,]
                 {
                     { 1, "Meron", "Getnet" },
@@ -293,7 +293,7 @@ namespace MyLibrary.Migrations
 
             migrationBuilder.InsertData(
                 table: "Category",
-                columns: new[] { "Id", "CategoryName" },
+                columns: new[] { "CategoryId", "CategoryName" },
                 values: new object[,]
                 {
                     { 1, "Education" },
@@ -305,7 +305,7 @@ namespace MyLibrary.Migrations
 
             migrationBuilder.InsertData(
                 table: "Book",
-                columns: new[] { "Id", "AuthorId", "CategoryId", "Language", "PublishDate", "Title", "UserId" },
+                columns: new[] { "BookId", "AuthorId", "CategoryId", "Language", "PublishDate", "Title", "UserId" },
                 values: new object[,]
                 {
                     { 4, 4, 2, "Amharic", new DateTime(1980, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Amde Hymanot", "00000000-ffff-ffff-ffff-ffffffffffff" },
@@ -324,17 +324,20 @@ namespace MyLibrary.Migrations
             migrationBuilder.InsertData(
                 table: "Borrow",
                 columns: new[] { "BorrowId", "BookId", "DateBorrowed", "DateReturned", "UserId" },
-                values: new object[] { 1, 1, new DateTime(2019, 8, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "00000000-ffff-ffff-ffff-ffffffffffff" });
+                values: new object[,]
+                {
+                    { 1, 1, new DateTime(2019, 8, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "00000000-ffff-ffff-ffff-ffffffffffff" },
+                    { 2, 2, new DateTime(2019, 8, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2019, 8, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), "00000000-ffff-ffff-ffff-ffffffffffff" }
+                });
 
             migrationBuilder.InsertData(
                 table: "wishList",
                 columns: new[] { "WishListId", "BookId", "UserId" },
-                values: new object[] { 2, 7, "00000000-ffff-ffff-ffff-ffffffffffff" });
-
-            migrationBuilder.InsertData(
-                table: "wishList",
-                columns: new[] { "WishListId", "BookId", "UserId" },
-                values: new object[] { 1, 6, "00000000-ffff-ffff-ffff-ffffffffffff" });
+                values: new object[,]
+                {
+                    { 2, 7, "00000000-ffff-ffff-ffff-ffffffffffff" },
+                    { 1, 6, "00000000-ffff-ffff-ffff-ffffffffffff" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
