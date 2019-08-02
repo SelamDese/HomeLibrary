@@ -4,7 +4,7 @@
     ViewData["Title"] = "Indexxx";
 }
 
-<h1>Indexxx</h1>
+<h1> My Books</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -21,9 +21,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.PublishDate)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.catagory)
-            </th>
+           @* <th>
+                @Html.DisplayNameFor(model => model.catagory.CategoryName)
+            </th> *@
             <th></th>
         </tr>
     </thead>
@@ -39,13 +39,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.PublishDate)
             </td>
+            @*
             <td>
                 @Html.DisplayFor(modelItem => item.catagory.CategoryName)
-            </td>
+            </td> *@
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.BookId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.BookId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.BookId">Delete</a>
             </td>
         </tr>
 }
