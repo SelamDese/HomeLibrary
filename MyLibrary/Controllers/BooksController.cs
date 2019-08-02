@@ -48,7 +48,7 @@ namespace MyLibrary.Controllers
                     TypeId = grouped.Key.CategoryId,
                     TypeName = grouped.Key.CategoryName,
                     BookCount = grouped.Select(x => x.b.BookId).Count(),
-                    Books = grouped.Select(x => x.b).Take(3).ToList()
+                    Books = grouped.Select(x => x.b).Take(5).ToList()
                 }).ToListAsync();
 
             model.GroupedBooks = GroupedBooks;
@@ -65,18 +65,8 @@ namespace MyLibrary.Controllers
 
         }
 
-        [Authorize]
-        public async Task<IActionResult> MyBookIndex()
-        {
-            //setting the user obj to this variable
-            var user = await GetCurrentUserAsync();
-            //return a view
-            return View(await _context.Book.Where(b => b.UserId == user.Id).ToListAsync());
-
-        }
-
         //Adding a search bar
-
+        
         public async Task<IActionResult> Search(string searchBooks)
         {
             var booksSearch = from b in _context.Book
@@ -91,6 +81,17 @@ namespace MyLibrary.Controllers
             this.AcceptButton = this.buttonSearch;
 
             return View(await booksSearch.ToListAsync());
+        }
+
+
+        [Authorize]
+        public async Task<IActionResult> MyBookIndex()
+        {
+            //setting the user obj to this variable
+            var user = await GetCurrentUserAsync();
+            //return a view
+            return View(await _context.Book.Where(b => b.UserId == user.Id).ToListAsync());
+
         }
         
         // GET: Books/Details/5
@@ -114,7 +115,6 @@ namespace MyLibrary.Controllers
         }
 
         // GET: Books/Create
-       
         [Authorize]
         public IActionResult Create()
         {
@@ -194,13 +194,14 @@ namespace MyLibrary.Controllers
 
                 await _context.SaveChangesAsync();
 
-            return RedirectToAction("MyBookIndex", new { id = viewModel.Book.BookId.ToString() });
+            return RedirectToAction(nameof(MyBookIndex));
             }
             return View(viewModel.Book);
         }
 
-        // GET: Books/Edit/5
 
+        // GET: Books/Edit/5
+        
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
