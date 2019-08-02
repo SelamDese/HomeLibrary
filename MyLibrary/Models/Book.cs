@@ -10,11 +10,12 @@ namespace MyLibrary.Models
     public class Book
     {
         [Key]
-        public int Id { get; set; }
+        public int BookId { get; set; }
 
         [Required]
         public string Title { get; set; }
         public string Language { get; set; }
+        [Required]
         public int CategoryId { get; set; }
 
         // NOTE: We use the DisplayFormat attribute to prevent displaying the time
@@ -34,6 +35,7 @@ namespace MyLibrary.Models
         public string UserId { get; set; }
         [Required]
         public ApplicationUser User { get; set; }
+
         [Display(Name = "Catagory")]
         public Category catagory { get; set; }
         public virtual ICollection<Borrow> Borrows { get; set; }
