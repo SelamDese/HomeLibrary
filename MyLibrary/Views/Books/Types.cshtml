@@ -1,0 +1,51 @@
+﻿@model MyLibrary.Models.BookViewModel.BookCategoriesViewModel
+
+@{
+    ViewData["Title"] = "Types";
+}
+
+<h1>All Friends Books</h1>
+
+<p>
+   @* <a asp-action="Create">Create New</a> *@
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.GroupedBooks)
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.GroupedBooks)
+        {
+
+            <tr>
+                <td>
+                    <li>
+                        <a asp-controller="ProductTypes" asp-action="Details" asp-route-id="@item.TypeId">
+                            @Html.DisplayFor(modelItem => item.TypeName)
+                        </a>
+                        (@item.BookCount)
+                    </li>
+
+                    <ul>
+                        @{
+                            foreach (var book in item.Books)
+                            {
+                                <li>
+                                    <a asp-controller="Books" asp-action="Details" asp-route-id="@book.BookId">
+                                        @Html.DisplayFor(modelItem => book.Title)
+                                    </a>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>

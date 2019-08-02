@@ -10,13 +10,20 @@ namespace MyLibrary.Models
     {
         [Key]
         public int BorrowId { get; set; }
+
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        [Display(Name = "Borrowed On")]
+        [Required]
         public DateTime? DateBorrowed { get; set; }
+
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        [Display(Name = "Returned On")]
         public DateTime? DateReturned { get; set; } 
-        public Book books { get; set; }
+        [Required]
         public int BookId { get; set; }
         [Required]
         public string UserId { get; set; }
-        [Required]
         public ApplicationUser User { get; set; }
+        public Book books { get; set; }
     }
 }

@@ -33,13 +33,20 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Books" asp-action="Index">Librery Books</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Books" asp-action="Types">Librery Books</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Books" asp-action="MyBookIndex">My Books</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                        <li>
+                            <form asp-controller="Books" asp-action="Search" method="get">
+                                <input type="text" placeholder="Search Books" name="searchBooks" value="@ViewData["currentFilter"]" />
+                                <input type="submit" value="Search" class="btn btn-sm btn-info" />
+
+                            </form>
                         </li>
                     </ul>
                 </div>

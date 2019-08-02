@@ -69,9 +69,14 @@ namespace MyLibrary
 
             app.UseMvc(routes =>
             {
+
+                routes.MapRoute("types", "types",
+                    defaults: new { controller = "Books", action = "Types" });
+
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+
             });
         }
     }

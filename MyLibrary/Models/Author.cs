@@ -10,7 +10,7 @@ namespace MyLibrary.Models
     public class Author
     {
         [Key]
-        public int Id { get; set; }
+        public int AuthorId { get; set; }
 
         [Required]
         [Display(Name = "First Name")]

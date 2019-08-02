@@ -10,11 +10,11 @@ namespace MyLibrary.Models
     {
         [Key]
         public int WishListId { get; set; }
-        /*public Book book { get; set; }*/
         public int BookId { get; set; }
         [Required]
         public string UserId { get; set; }
         [Required]
+        public Book book { get; set; }
         public ApplicationUser User { get; set; }
     }
 }
