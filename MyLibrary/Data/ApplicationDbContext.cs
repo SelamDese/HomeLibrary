@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using MyLibrary.Models;
+using MyLibrary.Models.BookViewModel;
 
 namespace MyLibrary.Data
 {
@@ -71,43 +72,43 @@ namespace MyLibrary.Data
             modelBuilder.Entity<Author>().HasData(
                 new Author()
                 {
-                    Id = 1,
+                    AuthorId = 1,
                     FirstName = "Meron",
                     LastName = "Getnet"
                 },
                 new Author()
                 {
-                    Id = 2,
+                    AuthorId = 2,
                     FirstName = "Bewketu",
                     LastName = "Seyoum"
                 },
                 new Author()
                 {
-                    Id = 3,
+                    AuthorId = 3,
                     FirstName = "Daniel",
                     LastName = "Kibret"
                 },
                 new Author()
                 {
-                    Id = 4,
+                    AuthorId = 4,
                     FirstName = "Dn Birhanu",
                     LastName = "Gobena"
                 },
                 new Author()
                 {
-                    Id = 5,
+                    AuthorId = 5,
                     FirstName = "Adolf",
                     LastName = "Parlesak"
                 },
                 new Author()
                 {
-                    Id = 6,
+                    AuthorId = 6,
                     FirstName = "Anne",
                     LastName = "Frank"
                 },
                 new Author()
                 {
-                    Id = 7,
+                    AuthorId = 7,
                     FirstName = "Jeff ",
                     LastName = "Kinney"
                 }
@@ -116,27 +117,27 @@ namespace MyLibrary.Data
             modelBuilder.Entity<Category>().HasData(
                  new Category()
                  {
-                     Id = 1,
+                     CategoryId = 1,
                      CategoryName = "Education"
                  },
                  new Category()
                  {
-                     Id = 2,
+                     CategoryId = 2,
                      CategoryName = "Spiritual"
                  },
                  new Category()
                  {
-                     Id = 3,
+                     CategoryId = 3,
                      CategoryName = "Children's"
                  },
                  new Category()
                  {
-                     Id = 4,
+                     CategoryId = 4,
                      CategoryName = "History"
                  },
                  new Category()
                  {
-                     Id = 5,
+                     CategoryId = 5,
                      CategoryName = "Poems"
                  }
             );
@@ -144,7 +145,7 @@ namespace MyLibrary.Data
             modelBuilder.Entity<Book>().HasData(
                 new Book()
                 {
-                    Id = 1,
+                    BookId = 1,
                     Title = "Ye Habesha Jebdu",
                     Language = "Amharic",
                     AuthorId = 5,
@@ -154,7 +155,7 @@ namespace MyLibrary.Data
                 },
                 new Book()
                 {
-                    Id = 2,
+                    BookId = 2,
                     Title = "Yemaleda Dibab",
                     Language = "Amharic",
                     AuthorId = 2,
@@ -164,7 +165,7 @@ namespace MyLibrary.Data
                 },
                 new Book()
                 {
-                    Id = 3,
+                    BookId = 3,
                     Title = "Anne Frank",
                     Language = "English",
                     AuthorId = 6,
@@ -174,7 +175,7 @@ namespace MyLibrary.Data
                 },
                 new Book()
                 {
-                    Id = 4,
+                    BookId = 4,
                     Title = "Amde Hymanot",
                     Language = "Amharic",
                     AuthorId = 4,
@@ -184,7 +185,7 @@ namespace MyLibrary.Data
                 },
                 new Book()
                 {
-                    Id = 5,
+                    BookId = 5,
                     Title = "Sinksar",
                     Language = "Geaz",
                     AuthorId = 4,
@@ -194,7 +195,7 @@ namespace MyLibrary.Data
                 },
                 new Book()
                 {
-                    Id = 6,
+                    BookId = 6,
                     Title = "Mezgebe Taric",
                     Language = "Amharic",
                     AuthorId = 3,
@@ -204,7 +205,7 @@ namespace MyLibrary.Data
                 },
                 new Book()
                 {
-                    Id = 7,
+                    BookId = 7,
                     Title = "Dawit",
                     Language = "Geaz",
                     AuthorId = 2,
@@ -214,7 +215,7 @@ namespace MyLibrary.Data
                 },
                 new Book()
                 {
-                    Id = 8,
+                    BookId = 8,
                     Title = "Sine Fitret",
                     Language = "Amharic",
                     AuthorId = 3,
@@ -224,7 +225,7 @@ namespace MyLibrary.Data
                 },
                 new Book()
                 {
-                    Id = 9,
+                    BookId = 9,
                     Title = "Amimals",
                     Language = "English",
                     AuthorId = 7,
@@ -234,7 +235,7 @@ namespace MyLibrary.Data
                 },
                 new Book()
                 {
-                    Id = 10,
+                    BookId = 10,
                     Title = "Zuret",
                     Language = "Amharic",
                     AuthorId = 1,
@@ -244,7 +245,7 @@ namespace MyLibrary.Data
                 },
                 new Book()
                 {
-                    Id = 11,
+                    BookId = 11,
                     Title = "Wimpy Kid",
                     Language = "English",
                     AuthorId = 7,
@@ -260,6 +261,14 @@ namespace MyLibrary.Data
                     DateBorrowed = new DateTime(2019, 8, 8),
                     DateReturned = null,
                     BookId = 1,
+                    UserId = user.Id
+                },
+                new Borrow()
+                {
+                    BorrowId = 2,
+                    DateBorrowed = new DateTime(2019, 8, 8),
+                    DateReturned = new DateTime(2019, 8, 8),
+                    BookId = 2,
                     UserId = user.Id
                 }
 
@@ -281,5 +290,6 @@ namespace MyLibrary.Data
                 );
 
         }
+        
     }
 }
