@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MyLibrary.Data;
 using MyLibrary.Models;
+using MyLibrary.Models.BorrowViewModel;
 
 namespace MyLibrary.Controllers
 {
@@ -38,6 +39,8 @@ namespace MyLibrary.Controllers
         public async Task<IActionResult> borrowCart()
         {
             var user = await GetCurrentUserAsync();
+            /*var viewModel = new BorrowIndexViewModel();*/
+            /*return View(viewModel);*/
 
             return View(await _context.Borrow.Where(b => b.UserId == user.Id).ToListAsync());
 
@@ -94,59 +97,38 @@ namespace MyLibrary.Controllers
         // POST: Borrows/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        /*[Authorize]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create( int id)
-        {
-            var user = await GetCurrentUserAsync();
-
-            Book bookToBorrow = await _context.Book.SingleOrDefaultAsync(b => b.BookId == id && b.UserId != user.Id );
-
-            ModelState.Remove("UserId");
-            ModelState.Remove("BookId");
-            ModelState.Remove("DateBorrowed");
-
-            if (ModelState.IsValid)
-            {
-                var borrow = new Borrow();
-                borrow.UserId = user.Id;
-                borrow.BookId = bookToBorrow.BookId;
-                borrow.DateBorrowed = DateTime.Today;
-                borrow.DateReturned = null;
-                _context.Add(borrow);
-                await _context.SaveChangesAsync();
-            }
-
-            return RedirectToAction(nameof(borrowCart));
-            *//*return RedirectToAction("Index", "Borrows");*//*
-        }*/
+        
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create( int id)
         {
             var user = await GetCurrentUserAsync();
-
-            Book bookToBorrow = await _context.Book.SingleOrDefaultAsync(b => b.BookId == id && b.UserId != user.Id );
-
-            ModelState.Remove("UserId");
-            ModelState.Remove("BookId");
-            ModelState.Remove("DateBorrowed");
-
-            if (ModelState.IsValid)
+            try
             {
-                var borrow = new Borrow();
-                borrow.UserId = user.Id;
-                borrow.BookId = bookToBorrow.BookId;
-                borrow.DateBorrowed = DateTime.Today;
-                borrow.DateReturned = null;
-                _context.Add(borrow);
-                await _context.SaveChangesAsync();
-            }
+                Book bookToBorrow = await _context.Book.SingleOrDefaultAsync(b => b.BookId == id && b.UserId != user.Id);
 
-            return RedirectToAction(nameof(borrowCart));
-            /*return RedirectToAction("Index", "Borrows");*/
+                ModelState.Remove("UserId");
+                ModelState.Remove("BookId");
+                ModelState.Remove("DateBorrowed");
+
+                if (ModelState.IsValid)
+                {
+                    var borrow = new Borrow();
+                    borrow.UserId = user.Id;
+                    borrow.BookId = bookToBorrow.BookId;
+                    borrow.DateBorrowed = DateTime.Today;
+                    borrow.DateReturned = null;
+                    _context.Add(borrow);
+                    await _context.SaveChangesAsync();
+                }
+                return RedirectToAction(nameof(borrowCart));
+                /*return RedirectToAction("Index", "Borrows");*/
+            }
+            catch(Exception ex)
+            {
+                return RedirectToAction(nameof(borrowCart));
+            }
         }
 
 
