@@ -4,56 +4,76 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>Book Details</h1>
 
 <div>
     <h4>Book</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Title)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Title)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Language)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Language)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.PublishDate)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.PublishDate)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.User)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.User.Id)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.catagory)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.catagory.CategoryId)
         </dd>
     </dl>
 </div>
-<div>
+<hr />
+
+@foreach (var b in Model.Borrows)
+{
+    @if (b.books.BookId != Model.BookId)
+    {
+        <div>
+            <form asp-controller="Borrows" asp-action="Create" asp-route-id="@Model.BookId">
+                <input type="submit" value="Borrow A Book" class="btn btn-primary" />
+            </form>
+        </div>
+    }
+}
+@* <div>
     <form asp-controller="Borrows" asp-action="Create" asp-route-id="@Model.BookId">
         <input type="submit" value="Borrow A Book" class="btn btn-primary" />
 
         <a asp-action="Edit" asp-route-id="@Model.BookId"></a>
     </form>
 </div>
+<hr />
 <div>
-    <form asp-controller="Borrows" asp-action="Delete" asp-route-id="@Model.BookId">
-        <input type="submit" value="Return A Book" class="btn btn-primary" />
-
-        <a asp-action="Edit" asp-route-id="@Model.BookId"></a>
+    <form asp-controller="WishLists" asp-action="Create" asp-route-id="@Model.BookId">
+        <input type="submit" value="Wish List A Book" class="btn btn-primary" />
     </form>
 </div>
+<hr />*@
+@* <div>
+        <form asp-controller="Borrows" asp-action="Delete" asp-route-id="@Model.BookId">
+            <input type="submit" value="Return A Book" class="btn btn-primary" />
+
+            <a asp-action="Edit" asp-route-id="@Model.BookId"></a>
+        </form>
+    </div>*@
 
