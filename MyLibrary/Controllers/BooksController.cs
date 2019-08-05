@@ -33,8 +33,8 @@ namespace MyLibrary.Controllers
 
         // GET: Books
         
-            public async Task<IActionResult> Types()
-        {
+        public async Task<IActionResult> Types()
+            {
 
             var model = new BookCategoriesViewModel();
 
@@ -54,19 +54,22 @@ namespace MyLibrary.Controllers
             model.GroupedBooks = GroupedBooks;
             return View(model);
         }
-        public async Task<IActionResult> Index()
-        {
-            var books = await _context.Book
-                    .Include(b => b.User)
-                    .Include(b => b.catagory)
-                    .Take(20)
-                    .ToListAsync();
-            return View(books);
+        /* [Authorize]
+         public async Task<IActionResult> Index()
+         {
+             var books = await _context.Book
+                     .Include(b => b.User)
+                     .Include(b => b.catagory)
+                     .Take(20)
+                     .ToListAsync();
+             return View(books);
 
-        }
+         }*/
+
+  
 
         //Adding a search bar
-        
+
         public async Task<IActionResult> Search(string searchBooks)
         {
             var booksSearch = from b in _context.Book
@@ -104,6 +107,8 @@ namespace MyLibrary.Controllers
 
             var book = await _context.Book
                 .Include(b => b.User)
+                .Include(b => b.Borrows)
+                .Include(b => b.WishLists)
                 .Include(b => b.catagory)
                 .FirstOrDefaultAsync(m => m.BookId == id);
             if (book == null)
@@ -199,9 +204,8 @@ namespace MyLibrary.Controllers
             return View(viewModel.Book);
         }
 
-
         // GET: Books/Edit/5
-        
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -298,7 +302,7 @@ namespace MyLibrary.Controllers
             var book = await _context.Book.FindAsync(id);
             _context.Book.Remove(book);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(MyBookIndex));
         }
 
         private bool BookExists(int id)

@@ -38,8 +38,8 @@ namespace MyLibrary.Models
 
         [Display(Name = "Catagory")]
         public Category catagory { get; set; }
-        public virtual ICollection<Borrow> Borrows { get; set; }
-        public virtual ICollection<WishList> WishLists { get; set; }
+        public virtual ICollection<Borrow> Borrows { get; set; } = null;
+        public virtual ICollection<WishList> WishLists { get; set; } = null;
 
     }
 }
