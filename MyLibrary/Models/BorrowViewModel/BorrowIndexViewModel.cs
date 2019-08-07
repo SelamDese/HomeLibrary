@@ -7,8 +7,9 @@ namespace MyLibrary.Models.BorrowViewModel
 {
     public class BorrowIndexViewModel
     {
+        public List<Book> Book { get; set; }
         public List<Borrow> Borrow { get; set; }
         public Borrow borrow { get; set; }
-        public Book Book { get; set; }
+        public Book book { get; set; }
     }
 }

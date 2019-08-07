@@ -140,13 +140,15 @@ namespace MyLibrary.Controllers
 
             foreach (var w in book.WishLists)
             {
-                if (book.BookId == w.BookId && w.UserId == user.Id && book.UserId == user.Id)
+                if ( w.UserId == user.Id )
                 {
                     detailsViewModel.wishLists = wishList;
+                    detailsViewModel.IsWishListed = true;
                 }
                 else
                 {
                     detailsViewModel.wishLists = wishList;
+                    detailsViewModel.IsWishListed = false;
                 }
             }
 
