@@ -275,7 +275,7 @@ namespace MyLibrary.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "00000000-ffff-ffff-ffff-ffffffffffff", 0, "60819f6b-0fc5-4c17-b5ae-459ceac86f3a", "admin@admin.com", true, "admin", "admin", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAEAACcQAAAAEDXwNAip+MeyDVcopTumD31zv8GI/GVUPwJKmy5zkH2gVoMnzPCdDrNoskJ8/5Vo/w==", null, false, "7f434309-a4d9-48e9-9ebb-8803db794577", false, "admin@admin.com" });
+                values: new object[] { "00000000-ffff-ffff-ffff-ffffffffffff", 0, "c39b7db4-20e1-4ca5-9af5-c5e0734373d8", "admin@admin.com", true, "admin", "admin", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAEAACcQAAAAECSEQCGHyT/ib89qIuQ9ZKa2kfwKRHKcFtCkqI8Ol7PZ3uQUF52rDjPZ6BBDlbsIZQ==", null, false, "7f434309-a4d9-48e9-9ebb-8803db794577", false, "admin@admin.com" });
 
             migrationBuilder.InsertData(
                 table: "Author",

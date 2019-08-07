@@ -1,16 +1,17 @@
 ﻿@model IEnumerable<MyLibrary.Models.Book>
+
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
 @{
-    ViewData["Title"] = "Indexxx";
+    ViewData["Title"] = "CreateWishList";
 }
 
-    <h1>@((await UserManager.GetUserAsync(User)).FirstName)'s books! </h1>
+<h1>@((await UserManager.GetUserAsync(User)).FirstName)'s Wish Lists ! </h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Add To Wish List</a>
 </p>
 <table class="table">
     <thead>
@@ -24,12 +25,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.PublishDate)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Author)
+           @* <th>
+                @Html.DisplayNameFor(model => model.User)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Category)
-            </th>
+                @Html.DisplayNameFor(model => model.catagory)
+            </th>*@
             <th></th>
         </tr>
     </thead>
@@ -46,18 +47,19 @@
             <td>
                 @Html.DisplayFor(modelItem => item.PublishDate)
             </td>
+            @*
             <td>
-                @Html.DisplayFor(modelItem => item.Author.FullName)
+                @Html.DisplayFor(modelItem => item.User.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Category.CategoryName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.BookId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.BookId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.BookId">Delete</a>
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>
+                @Html.DisplayFor(modelItem => item.catagory.CategoryId)
+            </td>*@
+        <td>
+            @*<a asp-action="Edit" asp-route-id="@item.BookId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.BookId">Details</a> |*@
+                        <a asp-action="Delete" asp-route-id="@item.BookId">Delete From Wish List</a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>

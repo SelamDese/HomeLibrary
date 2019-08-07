@@ -1,0 +1,55 @@
+﻿@model IEnumerable<MyLibrary.Models.Borrow>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "borrowCart";
+}
+<h1>Books @((await UserManager.GetUserAsync(User)).FirstName) has borrowed! </h1>
+
+<p>
+    @*<a asp-action="Create">Create New</a> *@
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.books)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateBorrowed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.books.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateBorrowed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.FullName)
+            </td>
+            <td>
+                @*  <a asp-action="Edit" asp-route-id="@item.BorrowId">Edit</a> |*@
+                @*<a asp-action="Details" asp-route-id="@item.BorrowId">Details</a> |*@
+                @*<a asp-action="Delete" asp-route-id="@item.BorrowId">Return A Book</a>*@
+            </td>
+            <td>
+                <form asp-controller="Borrows" asp-action="Delete" asp-route-id="@item.BookId">
+                    <input type="submit" value="Return A Book" class="btn btn-primary" />
+                </form>
+            <td />
+        </tr>
+        }
+    </tbody>
+</table>
