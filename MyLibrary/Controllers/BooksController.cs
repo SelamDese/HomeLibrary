@@ -31,7 +31,7 @@ namespace MyLibrary.Controllers
             _userManager = userManager;
         }
 
-        // GET: Books
+        // GET: Books by type
 
         public async Task<IActionResult> Types()
         {
@@ -92,7 +92,6 @@ namespace MyLibrary.Controllers
             var user = await GetCurrentUserAsync();
             //return a view
             return View(await _context.Book.Where(b => b.UserId == user.Id).ToListAsync());
-
         }*/
         public async Task<IActionResult> MyBookIndex()
         {
@@ -136,14 +135,12 @@ namespace MyLibrary.Controllers
                         {
                             detailsViewModel.borrow = borrow;
                             detailsViewModel.IsBorrowed = true;
-
-
-                }
+                        }
                         else
                         {
                             detailsViewModel.borrow = borrow;
                             detailsViewModel.IsBorrowed = false;
-                }
+                        }
                     }
 
             var wishList = await _context.wishList
