@@ -36,13 +36,20 @@ namespace MyLibrary.Controllers
             return View(await _context.Borrow.Where(br => br.UserId == userId).ToListAsync());
         }
         /*Get borrow*/
-        public async Task<IActionResult> borrowCart()
+        [Authorize]
+        public async Task<IActionResult> borrowIndex()
         {
             var user = await GetCurrentUserAsync();
-            /*var viewModel = new BorrowIndexViewModel();*/
-            /*return View(viewModel);*/
 
-            return View(await _context.Borrow.Where(b => b.UserId == user.Id).ToListAsync());
+            var borrows = await _context.Borrow.Where(b => b.UserId == user.Id).ToListAsync();
+
+            BorrowIndexViewModel indexviewModel = new BorrowIndexViewModel();
+
+            indexviewModel.Borrow = borrows;
+
+            return View(indexviewModel);
+
+            /*return View(await _context.Borrow.Where(b => b.UserId == user.Id).ToListAsync());*/
 
         }
         /*public async Task<IActionResult> borrowCart()
@@ -111,6 +118,7 @@ namespace MyLibrary.Controllers
                 ModelState.Remove("UserId");
                 ModelState.Remove("BookId");
                 ModelState.Remove("DateBorrowed");
+                ModelState.Remove("DateReturned");
 
                 if (ModelState.IsValid)
                 {
@@ -122,12 +130,12 @@ namespace MyLibrary.Controllers
                     _context.Add(borrow);
                     await _context.SaveChangesAsync();
                 }
-                return RedirectToAction(nameof(borrowCart));
+                return RedirectToAction(nameof(borrowIndex));
                 /*return RedirectToAction("Index", "Borrows");*/
             }
             catch(Exception ex)
             {
-                return RedirectToAction(nameof(borrowCart));
+                return RedirectToAction(nameof(borrowIndex));
             }
         }
 
@@ -144,7 +152,7 @@ namespace MyLibrary.Controllers
             _context.Borrow.Remove(returnABook);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction(nameof(borrowCart));
+            return RedirectToAction(nameof(borrowIndex));
         }
 
         // GET: Borrows/Edit/5

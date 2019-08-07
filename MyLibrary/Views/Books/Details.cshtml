@@ -1,4 +1,4 @@
-﻿@model MyLibrary.Models.Book
+﻿@model MyLibrary.Models.BorrowViewModel.BorrowDetailViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -11,64 +11,64 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
+            @Html.DisplayNameFor(model => model.Book.Title)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Title)
+            @Html.DisplayFor(model => model.Book.Title)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Language)
+            @Html.DisplayNameFor(model => model.Book.Language)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Language)
+            @Html.DisplayFor(model => model.Book.Language)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PublishDate)
+            @Html.DisplayNameFor(model => model.Book.PublishDate)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PublishDate)
+            @Html.DisplayFor(model => model.Book.PublishDate)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.User)
+            @Html.DisplayNameFor(model => model.Book.User)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.User.Id)
+            @Html.DisplayFor(model => model.Book.User.FullName)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.catagory)
+       @* <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Book.catagory)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.catagory.CategoryId)
-        </dd>
+            @Html.DisplayFor(model => model.Book.catagory.CategoryId)
+        </dd>*@
     </dl>
 </div>
 <hr />
-
-@foreach (var b in Model.Borrows)
+@if (Model.IsBorrowed)
 {
-    @if (b.books.BookId != Model.BookId)
-    {
-        <div>
-            <form asp-controller="Borrows" asp-action="Create" asp-route-id="@Model.BookId">
-                <input type="submit" value="Borrow A Book" class="btn btn-primary" />
-            </form>
-        </div>
-    }
+<div>
+    <a asp-action="Types">Back to List</a>
+</div>
+}
+else
+{
+    <form asp-controller="Borrows" asp-action="Create" asp-route-id="@Model.Book.BookId">
+        <input type="submit" value="Borrow A Book" class="btn btn-primary" />
+    </form>
 }
 @* <div>
-    <form asp-controller="Borrows" asp-action="Create" asp-route-id="@Model.BookId">
-        <input type="submit" value="Borrow A Book" class="btn btn-primary" />
+        <form asp-controller="Borrows" asp-action="Create" asp-route-id="@Model.BookId">
+            <input type="submit" value="Borrow A Book" class="btn btn-primary" />
 
-        <a asp-action="Edit" asp-route-id="@Model.BookId"></a>
-    </form>
-</div>
-<hr />
-<div>
-    <form asp-controller="WishLists" asp-action="Create" asp-route-id="@Model.BookId">
-        <input type="submit" value="Wish List A Book" class="btn btn-primary" />
-    </form>
-</div>
-<hr />*@
+            <a asp-action="Edit" asp-route-id="@Model.BookId"></a>
+        </form>
+    </div>
+    <hr />
+    <div>
+        <form asp-controller="WishLists" asp-action="Create" asp-route-id="@Model.BookId">
+            <input type="submit" value="Wish List A Book" class="btn btn-primary" />
+        </form>
+    </div>
+    <hr />*@
 @* <div>
         <form asp-controller="Borrows" asp-action="Delete" asp-route-id="@Model.BookId">
             <input type="submit" value="Return A Book" class="btn btn-primary" />

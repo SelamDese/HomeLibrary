@@ -194,7 +194,7 @@ namespace MyLibrary.Migrations
                         {
                             Id = "00000000-ffff-ffff-ffff-ffffffffffff",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "60819f6b-0fc5-4c17-b5ae-459ceac86f3a",
+                            ConcurrencyStamp = "c39b7db4-20e1-4ca5-9af5-c5e0734373d8",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             FirstName = "admin",
@@ -202,7 +202,7 @@ namespace MyLibrary.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDXwNAip+MeyDVcopTumD31zv8GI/GVUPwJKmy5zkH2gVoMnzPCdDrNoskJ8/5Vo/w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECSEQCGHyT/ib89qIuQ9ZKa2kfwKRHKcFtCkqI8Ol7PZ3uQUF52rDjPZ6BBDlbsIZQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794577",
                             TwoFactorEnabled = false,

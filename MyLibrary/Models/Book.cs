@@ -18,8 +18,7 @@ namespace MyLibrary.Models
         [Required]
         public int CategoryId { get; set; }
 
-        // NOTE: We use the DisplayFormat attribute to prevent displaying the time
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        /*[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]*/
         [Display(Name = "Published On")]
         public DateTime PublishDate { get; set; }
 
@@ -38,8 +37,8 @@ namespace MyLibrary.Models
 
         [Display(Name = "Catagory")]
         public Category catagory { get; set; }
-        public virtual ICollection<Borrow> Borrows { get; set; } = null;
-        public virtual ICollection<WishList> WishLists { get; set; } = null;
+        public virtual ICollection<Borrow> Borrows { get; set; }
+        public virtual ICollection<WishList> WishLists { get; set; }
 
     }
 }

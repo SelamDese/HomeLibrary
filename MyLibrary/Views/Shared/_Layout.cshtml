@@ -38,12 +38,21 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Books" asp-action="MyBookIndex">My Books</a>
                         </li>
-                       @* <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="WishLists" asp-action="WishListIndex">My Wish Lists</a>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Authors" asp-action="Index">Authors</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>*@
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Borrows" asp-action="borrowIndex">Borrows</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="WishLists" asp-action="WishListIndex">Wish Lists</a>
+                        </li>
+                        @* <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="WishLists" asp-action="WishListIndex">My Wish Lists</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </li>*@
                         <li>
                             <form asp-controller="Books" asp-action="Search" method="get">
                                 <input type="text" placeholder="Search Books" name="searchBooks" value="@ViewData["currentFilter"]" />

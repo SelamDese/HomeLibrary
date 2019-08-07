@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using MyLibrary.Data;
 using MyLibrary.Models;
 using MyLibrary.Models.BookViewModel;
-
+using MyLibrary.Models.BorrowViewModel;
 
 namespace MyLibrary.Controllers
 {
@@ -32,9 +32,9 @@ namespace MyLibrary.Controllers
         }
 
         // GET: Books
-        
+
         public async Task<IActionResult> Types()
-            {
+        {
 
             var model = new BookCategoriesViewModel();
 
@@ -66,14 +66,12 @@ namespace MyLibrary.Controllers
 
          }*/
 
-  
-
         //Adding a search bar
 
         public async Task<IActionResult> Search(string searchBooks)
         {
             var booksSearch = from b in _context.Book
-                                 select b;
+                              select b;
 
             if (!String.IsNullOrEmpty(searchBooks))
             {
@@ -96,27 +94,71 @@ namespace MyLibrary.Controllers
             return View(await _context.Book.Where(b => b.UserId == user.Id).ToListAsync());
 
         }
-        
+
         // GET: Books/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
+                    var user = await GetCurrentUserAsync();
+
+                    var book = await _context.Book
+                        .Include(b => b.User)
+                        .Include(b => b.catagory)
+                        .Include(b => b.Borrows)
+                        .Include(b => b.WishLists)
+                        .FirstOrDefaultAsync(b => b.BookId == id);
+
+            var borrow = await _context.Borrow
+                .Include(br => br.User)
+                .Where(b => b.UserId == user.Id )
+                .FirstOrDefaultAsync(b => b.BookId == id);
+
+            BorrowDetailViewModel detailsViewModel = new BorrowDetailViewModel
+            {
+                Book = book
+            };
+            foreach (var br in book.Borrows)
+                    {
+                        if (book.BookId == br.BookId && br.DateReturned == null/* && br.UserId == user.Id && book.UserId != user.Id*/)
+                        {
+                            detailsViewModel.borrow = borrow;
+                            detailsViewModel.IsBorrowed = true;
+
+
+                }
+                        else
+                        {
+                            detailsViewModel.borrow = borrow;
+                            detailsViewModel.IsBorrowed = false;
+                }
+                    }
+
+            var wishList = await _context.wishList
+                .Include(br => br.User)
+                .Where(b => b.UserId == user.Id)
+                .FirstOrDefaultAsync(b => b.BookId == id);
+
+            foreach (var w in book.WishLists)
+            {
+                if (book.BookId == w.BookId && w.UserId == user.Id && book.UserId == user.Id)
+                {
+                    detailsViewModel.wishLists = wishList;
+                }
+                else
+                {
+                    detailsViewModel.wishLists = wishList;
+                }
+            }
+
             if (id == null)
-            {
-                return NotFound();
-            }
-
-            var book = await _context.Book
-                .Include(b => b.User)
-                .Include(b => b.Borrows)
-                .Include(b => b.WishLists)
-                .Include(b => b.catagory)
-                .FirstOrDefaultAsync(m => m.BookId == id);
-            if (book == null)
-            {
-                return NotFound();
-            }
-
-            return View(book);
+                    {
+                        return NotFound();
+                    }
+                    if (book == null)
+                    {
+                        return NotFound();
+                    }
+                    return View(detailsViewModel);
         }
 
         // GET: Books/Create
@@ -245,6 +287,7 @@ namespace MyLibrary.Controllers
             ModelState.Remove("Book.Language");
             ModelState.Remove("Book.AuthorId");
             ModelState.Remove("Book.UserId");
+            ModelState.Remove("Book.PublishDate");
             ModelState.Remove("Book.User");
 
             if (ModelState.IsValid)
