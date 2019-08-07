@@ -1,4 +1,4 @@
-﻿@model MyLibrary.Models.WishListViewModel.WishListIndexViewModel
+﻿@model IEnumerable<MyLibrary.Models.WishList>
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
@@ -6,7 +6,7 @@
 @{
     ViewData["Title"] = "Index";
 }
-<h1>@((await UserManager.GetUserAsync(User)).FirstName)'s borrows! </h1>
+    <h1> Books on @((await UserManager.GetUserAsync(User)).FirstName)'s Wish list </h1>
 <p>
     @* <a asp-action="Create">Create New</a>*@
 </p>
@@ -14,35 +14,35 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.wishList.BookId)
+                @Html.DisplayNameFor(model => model.book)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.wishList.User)
-            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>*@
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.WishList)
+        @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BookId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.User.FullName)
-                </td>
-                @* <td>
-                        <a asp-action="Edit" asp-route-id="@item.WishListId">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.WishListId">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.WishListId">Delete</a>
-                    </td>*@
-                <td>
-                    <form asp-controller="WishLists" asp-action="Delete" asp-route-id="@item.BookId">
-                        <input type="submit" value="Remove From Wish List" class="btn btn-primary" />
-                    </form>
-                <td />
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.book.Title)
+            </td>
+            @*<td>
+            @Html.DisplayFor(modelItem => item.User.FirstName)
+        </td>*@
+            @* <td>
+            <a asp-action="Edit" asp-route-id="@item.WishListId">Edit</a> |
+            <a asp-action="Details" asp-route-id="@item.WishListId">Details</a> |
+            <a asp-action="Delete" asp-route-id="@item.WishListId">Delete</a>
+        </td>*@
+            <td>
+                <form asp-controller="WishLists" asp-action="Delete" asp-route-id="@item.BookId">
+                    <input type="submit" value="Remove From Wish List" class="btn btn-primary" />
+                </form>
+            <td />
+        </tr>
         }
     </tbody>
 </table>

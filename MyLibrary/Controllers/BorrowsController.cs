@@ -37,7 +37,7 @@ namespace MyLibrary.Controllers
         }
         /*Get borrow*/
         [Authorize]
-        public async Task<IActionResult> borrowIndex()
+        /*public async Task<IActionResult> borrowIndex()
         {
             var user = await GetCurrentUserAsync();
 
@@ -49,9 +49,37 @@ namespace MyLibrary.Controllers
 
             return View(indexviewModel);
 
+            *//*return View(await _context.Borrow.Where(b => b.UserId == user.Id).ToListAsync());*//*
+
+        }*/
+
+        public async Task<IActionResult> borrowIndex()
+        {
+            var user = await GetCurrentUserAsync();
+
+            /*var borrows = await _context.Borrow
+                .Include(b => b.books)
+                .Where(b => b.UserId == user.Id)
+                .ToListAsync()
+                .FirstOrDefaultAsync(b => b.UserId == id);
+
+            .Include(b => b.WishLists)*/
+
+            var borrows = await _context.Borrow
+                .Include(br => br.books)
+                .Where(b => b.UserId == user.Id)
+                .ToListAsync();
+
+            /* BorrowIndexViewModel indexviewModel = new BorrowIndexViewModel();
+
+             indexviewModel.Borrow = borrows;*/
+
+            return View(borrows);
+
             /*return View(await _context.Borrow.Where(b => b.UserId == user.Id).ToListAsync());*/
 
         }
+
         /*public async Task<IActionResult> borrowCart()
         {
             var user = await GetCurrentUserAsync();
@@ -135,6 +163,7 @@ namespace MyLibrary.Controllers
             }
             catch(Exception ex)
             {
+
                 return RedirectToAction(nameof(borrowIndex));
             }
         }

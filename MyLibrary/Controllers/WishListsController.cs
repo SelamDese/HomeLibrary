@@ -32,7 +32,23 @@ namespace MyLibrary.Controllers
             return View(await applicationDbContext.ToListAsync());
         }*/
         [Authorize]
+
         public async Task<IActionResult> wishListIndex()
+        {
+            var user = await GetCurrentUserAsync();
+
+            var wishLists = await _context.wishList
+                .Include(w => w.book)
+                .Where(w => w.UserId == user.Id)
+                .ToListAsync();
+
+            return View(wishLists);
+
+            /*return View(await _context.wishList.Where(b => b.UserId == user.Id).ToListAsync());*/
+
+        }
+
+     /*   public async Task<IActionResult> wishListIndex()
         {
             var user = await GetCurrentUserAsync();
 
@@ -44,9 +60,9 @@ namespace MyLibrary.Controllers
 
             return View(WishListndexviewModel);
 
-            /*return View(await _context.wishList.Where(b => b.UserId == user.Id).ToListAsync());*/
+            *//*return View(await _context.wishList.Where(b => b.UserId == user.Id).ToListAsync());*//*
 
-        }
+        }*/
 
         // GET: WishLists/Details/5
         public async Task<IActionResult> Details(int? id)

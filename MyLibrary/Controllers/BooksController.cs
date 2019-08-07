@@ -86,13 +86,25 @@ namespace MyLibrary.Controllers
 
 
         [Authorize]
-        public async Task<IActionResult> MyBookIndex()
+        /*public async Task<IActionResult> MyBookIndex()
         {
             //setting the user obj to this variable
             var user = await GetCurrentUserAsync();
             //return a view
             return View(await _context.Book.Where(b => b.UserId == user.Id).ToListAsync());
 
+        }*/
+        public async Task<IActionResult> MyBookIndex()
+        {
+            //setting the user obj to this variable
+            var user = await GetCurrentUserAsync();
+            //return a view
+            var books = await _context.Book
+                .Include(b => b.Category)
+                .Include(b => b.Author)
+                .Where(b => b.UserId == user.Id)
+                .ToListAsync();
+            return View(books);
         }
 
         // GET: Books/Details/5
@@ -103,7 +115,8 @@ namespace MyLibrary.Controllers
 
                     var book = await _context.Book
                         .Include(b => b.User)
-                        .Include(b => b.catagory)
+                        .Include(b => b.Category)
+                        .Include(b => b.Author)
                         .Include(b => b.Borrows)
                         .Include(b => b.WishLists)
                         .FirstOrDefaultAsync(b => b.BookId == id);
@@ -329,7 +342,7 @@ namespace MyLibrary.Controllers
 
             var book = await _context.Book
                 .Include(b => b.User)
-                .Include(b => b.catagory)
+                .Include(b => b.Category)
                 .FirstOrDefaultAsync(m => m.BookId == id);
             if (book == null)
             {

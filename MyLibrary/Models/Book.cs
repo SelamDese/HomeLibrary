@@ -26,7 +26,7 @@ namespace MyLibrary.Models
         [Display(Name = "Author")]
         public int AuthorId { get; set; }
         
-        [NotMapped]
+        /*[NotMapped]*/
         [Display(Name = "Author")]
         public Author Author { get; set; }
 
@@ -35,8 +35,8 @@ namespace MyLibrary.Models
         [Required]
         public ApplicationUser User { get; set; }
 
-        [Display(Name = "Catagory")]
-        public Category catagory { get; set; }
+        [Display(Name = "Category")]
+        public Category Category { get; set; }
         public virtual ICollection<Borrow> Borrows { get; set; }
         public virtual ICollection<WishList> WishLists { get; set; }
 
