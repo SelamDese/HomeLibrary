@@ -19,19 +19,20 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+
             <div class="container">
+
+                @*<a class="navbar-brand" href="#">Navbar</a>*@
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"> Home Library</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <partial name="_LoginPartial" />
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
+                <div class="collapse navbar-collapse" id="navbarColor01">
+                    <ul class="navbar-nav mr-auto">
+                        @*<li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>*@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Books" asp-action="Types">Library</a>
                         </li>
@@ -42,26 +43,18 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Authors" asp-action="Index">Authors</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Borrows" asp-action="borrowIndex">Borrows</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Borrows" asp-action="borrowIndex">Borrowed</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="WishLists" asp-action="WishListIndex">Wish Lists</a>
                         </li>
-                        @* <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="WishLists" asp-action="WishListIndex">My Wish Lists</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </li>*@
-                        <hr/>
-                        <li>
-                            <form asp-controller="Books" asp-action="Search" method="get">
-                                <input type="text" placeholder="Search Books" name="searchBooks" value="@ViewData["currentFilter"]" />
-                                <input type="submit" value="Search" class="btn btn-sm btn-info" />
-
-                            </form>
-                        </li>
                     </ul>
+                    <form asp-controller="Books" asp-action="Search" method="get">
+                        <input type="text" placeholder="Search Books" name="searchBooks" value="@ViewData["currentFilter"]" />
+                        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                    <hr />
+                    <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>
