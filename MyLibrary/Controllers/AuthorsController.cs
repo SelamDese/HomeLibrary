@@ -36,7 +36,7 @@ namespace MyLibrary.Controllers
 
         // GET: Authors
         [Authorize]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> IndexNew()
         {
             return View(await _context.Author.ToListAsync());
         }
