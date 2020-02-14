@@ -25,9 +25,18 @@ namespace MyLibrary.Controllers
             _userManager = userManager;
         }
 
-        // GET: Authors
+        // get edited
         [Authorize]
         public async Task<IActionResult> Index()
+        {
+            return View(await _context.Author.ToListAsync());
+        }
+
+        //get edited
+
+        // GET: Authors
+        [Authorize]
+        public async Task<IActionResult> IndexNew()
         {
             return View(await _context.Author.ToListAsync());
         }
